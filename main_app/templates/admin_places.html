@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Admin - Manage Places{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Manage Places</h1>
+<div class="d-flex justify-content-between mb-4">
+    <h5 class="text-muted">Total Places: {{ places.count }}</h5>
+    <a href="{% url 'add_place' %}" class="btn btn-primary"><i class="fas fa-plus me-2"></i>Add New Place</a>
+</div>
+
+<div class="row g-4">
+    {% for place in places %}
+    <div class="col-md-4">
+        <div class="card h-100">
+            {% if place.image %}
+            <img src="{{ place.image.url }}" class="card-img-top" alt="{{ place.name }}">
+            {% else %}
+            <div class="card-img-top bg-light d-flex align-items-center justify-content-center">
+                <i class="fas fa-image fa-3x text-muted"></i>
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ place.name }}</h5>
+                <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i>{{ place.location }}</p>
+                <p><strong>Category:</strong> {{ place.get_category_display }}</p>
+                <p><strong>Rating:</strong> {{ place.rating }} / 5</p>
+                <div class="d-flex gap-2 mt-3">
+                    <a href="{% url 'edit_place' place.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a href="{% url 'delete_place' place.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this place?')">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-info text-center">No places added yet. Add your first place!</div>
+    {% endfor %}
+</div>
+{% endblock %}

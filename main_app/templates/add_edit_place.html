@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">{{ title }}</h1>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <!-- Name -->
+                        <div class="col-md-6">
+                            <label for="{{ form.name.id_for_label }}" class="form-label fw-medium">
+                                {{ form.name.label }}
+                            </label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="text-danger small mt-1">{{ form.name.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Location -->
+                        <div class="col-md-6">
+                            <label for="{{ form.location.id_for_label }}" class="form-label fw-medium">
+                                {{ form.location.label }}
+                            </label>
+                            {{ form.location }}
+                            {% if form.location.errors %}
+                                <div class="text-danger small mt-1">{{ form.location.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-12">
+                            <label for="{{ form.description.id_for_label }}" class="form-label fw-medium">
+                                {{ form.description.label }}
+                            </label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="text-danger small mt-1">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Image -->
+                        <div class="col-md-6">
+                            <label for="{{ form.image.id_for_label }}" class="form-label fw-medium">
+                                {{ form.image.label }}
+                            </label>
+                            {{ form.image }}
+                            {% if form.image.errors %}
+                                <div class="text-danger small mt-1">{{ form.image.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Category -->
+                        <div class="col-md-6">
+                            <label for="{{ form.category.id_for_label }}" class="form-label fw-medium">
+                                {{ form.category.label }}
+                            </label>
+                            {{ form.category }}
+                            {% if form.category.errors %}
+                                <div class="text-danger small mt-1">{{ form.category.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Entry Fee -->
+                        <div class="col-md-4">
+                            <label for="{{ form.entry_fee.id_for_label }}" class="form-label fw-medium">
+                                {{ form.entry_fee.label }}
+                            </label>
+                            {{ form.entry_fee }}
+                            {% if form.entry_fee.errors %}
+                                <div class="text-danger small mt-1">{{ form.entry_fee.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="col-md-4">
+                            <label for="{{ form.rating.id_for_label }}" class="form-label fw-medium">
+                                {{ form.rating.label }}
+                            </label>
+                            {{ form.rating }}
+                            {% if form.rating.errors %}
+                                <div class="text-danger small mt-1">{{ form.rating.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Best Season -->
+                        <div class="col-md-4">
+                            <label for="{{ form.best_season.id_for_label }}" class="form-label fw-medium">
+                                {{ form.best_season.label }}
+                            </label>
+                            {{ form.best_season }}
+                            {% if form.best_season.errors %}
+                                <div class="text-danger small mt-1">{{ form.best_season.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Opening Time -->
+                        <div class="col-md-6">
+                            <label for="{{ form.opening_time.id_for_label }}" class="form-label fw-medium">
+                                {{ form.opening_time.label }}
+                            </label>
+                            {{ form.opening_time }}
+                            {% if form.opening_time.errors %}
+                                <div class="text-danger small mt-1">{{ form.opening_time.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Closing Time -->
+                        <div class="col-md-6">
+                            <label for="{{ form.closing_time.id_for_label }}" class="form-label fw-medium">
+                                {{ form.closing_time.label }}
+                            </label>
+                            {{ form.closing_time }}
+                            {% if form.closing_time.errors %}
+                                <div class="text-danger small mt-1">{{ form.closing_time.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary py-2">Save Place</button>
+                        <a href="{% url 'admin_places' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

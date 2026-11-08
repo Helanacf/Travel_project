@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Explore Places - TravelSpot{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Explore Tourist Destinations</h1>
+
+<!-- Search Form -->
+<div class="card shadow mb-5">
+    <div class="card-body p-4">
+        <form method="GET" class="row g-3">
+            <div class="col-md-3">
+                <input type="text" name="name" class="form-control" placeholder="Place Name" value="{{ request.GET.name }}">
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="location" class="form-control" placeholder="Location" value="{{ request.GET.location }}">
+            </div>
+            <div class="col-md-2">
+                <select name="category" class="form-select">
+                    <option value="">All Categories</option>
+                    {% for value, label in form.fields.category.choices %}
+                        <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="text" name="season" class="form-control" placeholder="Season" value="{{ request.GET.season }}">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Places -->
+<div class="row g-4">
+    {% for place in places %}
+    <div class="col-md-4">
+        <div class="card h-100">
+            {% if place.image %}
+            <img src="{{ place.image.url }}" class="card-img-top" alt="{{ place.name }}">
+            {% else %}
+            <div class="card-img-top bg-light d-flex align-items-center justify-content-center">
+                <i class="fas fa-image fa-3x text-muted"></i>
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ place.name }}</h5>
+                <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i>{{ place.location }}</p>
+                <p>{{ place.description|truncatewords:25 }}</p>
+                <div class="d-flex justify-content-between mt-3">
+                    <span><strong>Rating:</strong> {{ place.rating }} / 5</span>
+                    <span><strong>Fee:</strong> ₹{{ place.entry_fee|floatformat:0 }}</span>
+                </div>
+                <p class="mt-2"><strong>Best Season:</strong> {{ place.best_season|default:"Anytime" }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-warning text-center">No places match your criteria. Try adjusting your search.</div>
+    {% endfor %}
+</div>
+{% endblock %}

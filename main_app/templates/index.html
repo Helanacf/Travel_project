@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Home - TravelSpot{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-4 fw-bold mb-4">Discover India's Hidden Gems</h1>
+    <p class="lead text-muted mb-5">Explore breathtaking destinations, from serene hill stations to vibrant beaches and ancient heritage sites.</p>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'user_places' %}" class="btn btn-success btn-lg">Explore Places Now</a>
+    {% else %}
+    <a href="{% url 'login' %}" class="btn btn-success btn-lg">Explore Places Now</a>
+    {% endif %}
+</div>
+
+<div class="row g-4 mt-5">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-mountain fa-4x text-primary mb-4"></i>
+                <h5 class="card-title">Hill Stations</h5>
+                <p class="text-muted">Escape to cool mountains and misty valleys.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-water fa-4x text-primary mb-4"></i>
+                <h5 class="card-title">Beaches</h5>
+                <p class="text-muted">Relax on pristine shores with golden sands.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-landmark fa-4x text-primary mb-4"></i>
+                <h5 class="card-title">Heritage Sites</h5>
+                <p class="text-muted">Step back in time with rich history.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
